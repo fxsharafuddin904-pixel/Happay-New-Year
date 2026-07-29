@@ -1,0 +1,489 @@
+/* =========================
+RESET
+========================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:"Hind Siliguri",sans-serif;
+
+    background:linear-gradient(135deg,#050816,#0b1630,#111b40);
+
+    min-height:100vh;
+
+    overflow:hidden;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+}
+
+/* =========================
+CONTAINER
+========================= */
+
+.container{
+
+    width:100%;
+
+    max-width:450px;
+
+    padding:20px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.page{
+
+    display:none;
+
+    animation:fade .8s ease;
+
+}
+
+.page.active{
+
+    display:block;
+
+}
+
+@keyframes fade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(25px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* =========================
+GLASS CARD
+========================= */
+
+.glass-card{
+
+    background:rgba(255,255,255,.08);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid rgba(255,255,255,.12);
+
+    border-radius:25px;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    box-shadow:0 15px 45px rgba(0,0,0,.35);
+
+}
+
+.countdown-card h3{
+
+    font-size:28px;
+
+    margin-bottom:20px;
+
+    color:#8ecbff;
+
+}
+
+#countdown{
+
+    font-size:42px;
+
+    font-weight:bold;
+
+    color:#ffffff;
+
+    margin-bottom:20px;
+
+    letter-spacing:3px;
+
+}
+
+.glass-card p{
+
+    font-size:18px;
+
+    line-height:1.9;
+
+    color:#dbe7ff;
+
+}
+/* =========================
+HEADINGS
+========================= */
+
+h2{
+
+    font-size:32px;
+
+    margin-bottom:22px;
+
+    color:#ffffff;
+
+    line-height:1.5;
+
+}
+
+.story{
+
+    font-size:18px;
+
+    line-height:2;
+
+    color:#e6ecff;
+
+    margin-bottom:35px;
+
+    min-height:220px;
+
+}
+
+/* =========================
+BUTTON
+========================= */
+
+.nextBtn{
+
+    width:100%;
+
+    height:58px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:linear-gradient(135deg,#6c63ff,#1fc8ff);
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.35s;
+
+}
+
+.nextBtn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 30px rgba(31,200,255,.35);
+
+}
+
+/* =========================
+MUSIC BUTTON
+========================= */
+
+.music-control{
+
+    margin-top:30px;
+
+}
+
+#musicBtn{
+
+    width:100%;
+
+    height:55px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:#ff3b30;
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+#musicBtn:hover{
+
+    transform:scale(1.03);
+
+}
+
+.made{
+
+    margin-top:28px;
+
+    color:#c9d7ff;
+
+    font-size:15px;
+
+  }
+/* =========================
+RAIN EFFECT
+========================= */
+
+.rain{
+
+    position:fixed;
+
+    inset:0;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
+    z-index:0;
+
+}
+
+.rain::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-100%;
+
+    background-image:
+    repeating-linear-gradient(
+        transparent 0px,
+        transparent 18px,
+        rgba(255,255,255,.12) 19px,
+        rgba(255,255,255,.12) 20px
+    );
+
+    animation:rainFall 7s linear infinite;
+
+}
+
+@keyframes rainFall{
+
+    from{
+
+        transform:translateY(-50%);
+
+    }
+
+    to{
+
+        transform:translateY(50%);
+
+    }
+
+}
+
+/* =========================
+FLOATING HEARTS
+========================= */
+
+.hearts{
+
+    position:fixed;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+
+    z-index:1;
+
+}
+
+.hearts::before,
+.hearts::after{
+
+    content:"❤️ ❤️ 💙 ✨ ❤️";
+
+    position:absolute;
+
+    width:100%;
+
+    text-align:center;
+
+    font-size:22px;
+
+    opacity:.18;
+
+    animation:floatHearts 14s linear infinite;
+
+}
+
+.hearts::after{
+
+    animation-delay:7s;
+
+}
+
+@keyframes floatHearts{
+
+    0%{
+
+        transform:translateY(100vh);
+
+    }
+
+    100%{
+
+        transform:translateY(-120vh);
+
+    }
+
+}
+
+/* =========================
+TYPING EFFECT
+========================= */
+
+.typing{
+
+    overflow:hidden;
+
+    white-space:pre-wrap;
+
+    border-right:2px solid #ffffff;
+
+    animation:cursor .8s infinite;
+
+}
+
+@keyframes cursor{
+
+    50%{
+
+        border-color:transparent;
+
+    }
+
+  }
+/* =========================
+RESPONSIVE
+========================= */
+
+@media (max-width:480px){
+
+    .container{
+
+        padding:16px;
+
+    }
+
+    .glass-card{
+
+        padding:28px 18px;
+
+        border-radius:20px;
+
+    }
+
+    #countdown{
+
+        font-size:34px;
+
+        letter-spacing:2px;
+
+    }
+
+    h2{
+
+        font-size:26px;
+
+    }
+
+    .story{
+
+        font-size:16px;
+
+        line-height:1.9;
+
+        min-height:auto;
+
+    }
+
+    .nextBtn{
+
+        height:54px;
+
+        font-size:17px;
+
+    }
+
+    #musicBtn{
+
+        height:52px;
+
+        font-size:17px;
+
+    }
+
+}
+
+/* =========================
+SMOOTH ANIMATIONS
+========================= */
+
+.glass-card{
+
+    transition:.35s ease;
+
+}
+
+.glass-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 20px 45px rgba(0,0,0,.45);
+
+}
+
+button{
+
+    transition:all .3s ease;
+
+}
+
+button:active{
+
+    transform:scale(.96);
+
+}
+
+/* =========================
+END OF FILE
+========================= */

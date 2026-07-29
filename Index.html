@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Happy Birthday ❤️</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio id="bgMusic" loop autoplay>
+
+    <source src="ssstik.io_1785264460697.mp3" type="audio/mpeg">
+
+</audio>
+
+<!-- Rain -->
+<div class="rain"></div>
+
+<!-- Floating Hearts -->
+<div class="hearts"></div>
+
+<div class="container">
+
+<!-- =========================
+COUNTDOWN PAGE
+========================= -->
+
+<section id="countdownPage" class="page active">
+
+<div class="glass-card countdown-card">
+
+<h3>🎂 Birthday Surprise</h3>
+
+<h1 id="countdown">
+
+00 : 00 : 00
+
+</h1>
+
+<p>
+
+অপেক্ষা করো... ❤️
+
+<br>
+
+আজ রাত <strong>৮:২০</strong> টায় একটি বিশেষ বার্তা খুলবে।
+
+</p>
+
+</div>
+
+</section>
+
+<!-- =========================
+STEP 1
+========================= -->
+
+<section id="step1" class="page">
+
+<div class="glass-card">
+
+<h2>
+
+🌙 আজ অনেক কিছু বলার আছে...
+
+</h2>
+
+<p class="story">
+
+জানি, তুমি হয়তো আজ আর আমার জীবনের অংশ নও।
+
+তবুও আজকের দিনটা শুধু তোমার।
+
+তাই কিছু কথা বলতে চাই... 🌸
+
+</p>
+
+<button class="nextBtn" onclick="nextStep(2)">
+
+পরের পৃষ্ঠা ➜
+
+</button>
+
+</div>
+
+</section>
+<!-- =========================
+STEP 2
+========================= -->
+
+<section id="step2" class="page">
+
+<div class="glass-card">
+
+<h2>
+
+💭 কিছু স্মৃতি...
+
+</h2>
+
+<p class="story">
+
+এক সময় প্রতিদিন কথা হতো...
+
+হাসি ছিল...
+
+অভিমান ছিল...
+
+আজ সেগুলো শুধু স্মৃতি।
+
+তবুও সেই মুহূর্তগুলো আজও আমার কাছে অমূল্য। 💙
+
+</p>
+
+<button class="nextBtn" onclick="nextStep(3)">
+
+আরও পড়ো ➜
+
+</button>
+
+</div>
+
+</section>
+
+<!-- =========================
+STEP 3
+========================= -->
+
+<section id="step3" class="page">
+
+<div class="glass-card">
+
+<h2>
+
+🌧️ কিছু সত্যি কথা...
+
+</h2>
+
+<p class="story">
+
+তুমি চলে গেছো...
+
+হয়তো সেটাই তোমার ভালো থাকার পথ ছিল।
+
+আমি তোমাকে কখনো আটকাইনি...
+
+কারণ ভালোবাসা কখনো জোর করে ধরে রাখা যায় না। 🌙
+
+</p>
+
+<button class="nextBtn" onclick="nextStep(4)">
+
+শেষ কথা ➜
+
+</button>
+
+</div>
+
+</section>
+<!-- =========================
+STEP 4
+========================= -->
+
+<section id="step4" class="page">
+
+<div class="glass-card">
+
+<h2>
+
+🎂 শুভ জন্মদিন
+
+</h2>
+
+<p class="story">
+
+শুভ জন্মদিন! 🎉🎂
+
+<br><br>
+
+আল্লাহ যেন তোমার প্রতিটি স্বপ্ন পূরণ করেন।
+
+<br><br>
+
+তুমি সবসময় ভালো থেকো।
+
+<br><br>
+
+তোমার মুখের হাসি যেন কখনো হারিয়ে না যায়।
+
+<br><br>
+
+আমি তোমার জীবনে না থাকলেও,
+
+আমার দোয়া সবসময় থাকবে।
+
+❤️
+
+</p>
+
+<button class="nextBtn" onclick="nextStep(5)">
+
+শেষ পৃষ্ঠা ➜
+
+</button>
+
+</div>
+
+</section>
+
+<!-- =========================
+STEP 5
+========================= -->
+
+<section id="step5" class="page">
+
+<div class="glass-card">
+
+<h2>
+
+🌌 বিদায়...
+
+</h2>
+
+<p class="story">
+
+কিছু মানুষ গল্প হয়ে যায়...
+
+<br><br>
+
+কিন্তু কিছু গল্প কখনো শেষ হয় না।
+
+<br><br>
+
+ভালো থেকো।
+
+<br><br>
+
+শুভ জন্মদিন। ❤️🌙
+
+</p>
+
+<div class="music-control">
+
+<button id="musicBtn" onclick="toggleMusic()">
+
+🔇 Music OFF
+
+</button>
+
+</div>
+
+<p class="made">
+
+Made with ❤️
+
+</p>
+
+</div>
+
+</section>
+</div>
+
+<!-- End Container -->
+</div>
+
+<!-- =========================
+SCRIPT
+========================= -->
+
+<script src="script.js"></script>
+
+</body>
+
+    </html>
