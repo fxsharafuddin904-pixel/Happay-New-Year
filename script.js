@@ -4,95 +4,73 @@
 
 const pages = document.querySelectorAll(".page");
 
+const loginPage = document.getElementById("loginPage");
 const countdownPage = document.getElementById("countdownPage");
-const step1 = document.getElementById("step1");
-const step2 = document.getElementById("step2");
-const step3 = document.getElementById("step3");
-const step4 = document.getElementById("step4");
-const step5 = document.getElementById("step5");
 
 const countdown = document.getElementById("countdown");
 
-const music = document.getElementById("bgMusic");
-const musicBtn = document.getElementById("musicBtn");
+const bgMusic = document.getElementById("bgMusic");
+const clickSound = document.getElementById("clickSound");
+
+const keyInput = document.getElementById("keyInput");
 
 // =========================
-// BIRTHDAY TIME
+// TARGET TIME
 // =========================
 
-// 29 July 2026 - 8:20 PM
+// আজ রাত 9:30
 
-const targetDate = new Date(
-    "2026-07-29T20:20:00"
-);
+const targetDate = new Date("2026-07-29T21:30:00");
 
 // =========================
-// PAGE FUNCTION
+// PAGE FUNCTIONS
 // =========================
 
 function hideAllPages(){
 
-    pages.forEach(page=>{
-
-        page.classList.remove("active");
-
-    });
+    pages.forEach(page=>page.classList.remove("active"));
 
 }
 
-function showPage(page){
+function showPage(id){
 
     hideAllPages();
 
-    page.classList.add("active");
+    document.getElementById(id).classList.add("active");
 
 }
 
 // =========================
-// NEXT STEP
+// AUTO FILL KEY
 // =========================
 
-function nextStep(step){
+function autoFillKey(){
 
-    hideAllPages();
-
-    document
-    .getElementById("step"+step)
-    .classList
-    .add("active");
+    keyInput.value = "112233";
 
 }
 
 // =========================
-// MUSIC BUTTON
+// LOGIN
 // =========================
 
-let musicPlaying = true;
+function loginSite(){
 
-function toggleMusic(){
+    clickSound.currentTime = 0;
+    clickSound.play();
 
-    if(musicPlaying){
+    bgMusic.play().catch(()=>{});
 
-        music.pause();
-
-        musicBtn.innerHTML =
-        "🔊 Music ON";
-
-    }else{
-
-        music.play();
-
-        musicBtn.innerHTML =
-        "🔇 Music OFF";
-
-    }
-
-    musicPlaying = !musicPlaying;
+    showPage("countdownPage");
 
 }
 // =========================
-// REAL COUNTDOWN
+// COUNTDOWN
 // =========================
+
+const timer = setInterval(updateCountdown,1000);
+
+updateCountdown();
 
 function updateCountdown(){
 
@@ -100,248 +78,148 @@ function updateCountdown(){
 
     const distance = targetDate - now;
 
-    // Countdown finished
     if(distance <= 0){
 
-        localStorage.setItem(
-            "birthdayUnlocked",
-            "true"
-        );
-
-        showPage(step1);
-
         clearInterval(timer);
+
+        localStorage.setItem("birthdayOpen","true");
+
+        showPage("step1");
 
         return;
 
     }
 
-    const days = Math.floor(
-        distance / (1000 * 60 * 60 * 24)
-    );
-
-    const hours = Math.floor(
-        (distance % (1000 * 60 * 60 * 24))
-        / (1000 * 60 * 60)
-    );
-
-    const minutes = Math.floor(
-        (distance % (1000 * 60 * 60))
-        / (1000 * 60)
-    );
-
-    const seconds = Math.floor(
-        (distance % (1000 * 60))
-        / 1000
-    );
+    const h = Math.floor(distance/(1000*60*60));
+    const m = Math.floor((distance%(1000*60*60))/(1000*60));
+    const s = Math.floor((distance%(1000*60))/1000);
 
     countdown.innerHTML =
-
-        `${days}d : ${String(hours).padStart(2,"0")} : ${String(minutes).padStart(2,"0")} : ${String(seconds).padStart(2,"0")}`;
+    `${String(h).padStart(2,"0")} :
+     ${String(m).padStart(2,"0")} :
+     ${String(s).padStart(2,"0")}`;
 
 }
 
-const timer = setInterval(
-    updateCountdown,
-    1000
-);
+// =========================
+// NEXT PAGE
+// =========================
 
-updateCountdown();
+function nextStep(step){
+
+    clickSound.currentTime = 0;
+
+    clickSound.play();
+
+    showPage("step"+step);
+
+}
+
+// =========================
+// BACK PAGE
+// =========================
+
+function goBack(page){
+
+    clickSound.currentTime = 0;
+
+    clickSound.play();
+
+    showPage(page);
+
+}
 
 // =========================
 // FIRST LOAD
 // =========================
 
-window.onload = function(){
+window.onload = ()=>{
 
-    if(
-        localStorage.getItem(
-            "birthdayUnlocked"
-        ) === "true"
-    ){
+    if(localStorage.getItem("birthdayOpen")==="true"){
 
-        showPage(step1);
+        showPage("step1");
 
     }else{
 
-        showPage(countdownPage);
+        showPage("loginPage");
 
     }
 
 };
 // =========================
-// AUTO PLAY MUSIC
+// NEXT / BACK
 // =========================
-
-window.addEventListener("load", () => {
-
-    music.play().catch(() => {
-        console.log("Autoplay blocked by browser.");
-    });
-
-});
-
-// =========================
-// TYPING EFFECT
-// =========================
-
-function typeWriter(element,text,speed=40){
-
-    element.innerHTML="";
-
-    let i=0;
-
-    function typing(){
-
-        if(i<text.length){
-
-            element.innerHTML+=text.charAt(i);
-
-            i++;
-
-            setTimeout(typing,speed);
-
-        }
-
-    }
-
-    typing();
-
-}
-
-// =========================
-// START TYPING WHEN PAGE CHANGES
-// =========================
-
-const storyTexts=document.querySelectorAll(".story");
-
-const storyContent=[
-`জানি, তুমি হয়তো আজ আর আমার জীবনের অংশ নও।
-
-তবুও আজকের দিনটা শুধু তোমার।
-
-তাই কিছু কথা বলতে চাই... 🌸`,
-
-`এক সময় প্রতিদিন কথা হতো...
-
-হাসি ছিল...
-
-অভিমান ছিল...
-
-আজ সেগুলো শুধু স্মৃতি।
-
-তবুও সেই মুহূর্তগুলো আজও আমার কাছে অমূল্য। 💙`,
-
-`তুমি চলে গেছো...
-
-হয়তো সেটাই তোমার ভালো থাকার পথ ছিল।
-
-আমি তোমাকে কখনো আটকাইনি...
-
-কারণ ভালোবাসা কখনো জোর করে ধরে রাখা যায় না। 🌙`,
-
-`শুভ জন্মদিন! 🎂🎉
-
-আল্লাহ যেন তোমার প্রতিটি স্বপ্ন পূরণ করেন।
-
-তুমি সবসময় ভালো থেকো।
-
-তোমার মুখের হাসি যেন কখনো হারিয়ে না যায়।
-
-আমি তোমার জীবনে না থাকলেও আমার দোয়া সবসময় থাকবে। ❤️`,
-
-`কিছু মানুষ গল্প হয়ে যায়...
-
-কিন্তু কিছু গল্প কখনো শেষ হয় না।
-
-ভালো থেকো...
-
-শুভ জন্মদিন। ❤️🌙`
-];
-
-function startTyping(step){
-
-    const el=document.querySelector(`#step${step} .story`);
-
-    if(!el) return;
-
-    el.classList.add("typing");
-
-    typeWriter(el,storyContent[step-1],35);
-
-}
 
 function nextStep(step){
 
-    hideAllPages();
+    clickSound.currentTime = 0;
+    clickSound.play();
 
-    const page=document.getElementById("step"+step);
+    showPage("step" + step);
 
-    page.classList.add("active");
+}
 
-    startTyping(step);
+function goBack(page){
 
-  }
-// =========================
-// START TYPING AFTER COUNTDOWN
-// =========================
+    clickSound.currentTime = 0;
+    clickSound.play();
 
-if(localStorage.getItem("birthdayUnlocked")==="true"){
-
-    setTimeout(()=>{
-
-        startTyping(1);
-
-    },300);
+    showPage(page);
 
 }
 
 // =========================
-// PREVENT MULTIPLE MUSIC
+// MUSIC TOGGLE
 // =========================
 
-document.addEventListener("visibilitychange",()=>{
+let musicOn = true;
 
-    if(document.hidden){
+function toggleMusic(){
 
-        music.pause();
+    clickSound.currentTime = 0;
+    clickSound.play();
+
+    const btn = document.getElementById("musicBtn");
+
+    if(musicOn){
+
+        bgMusic.pause();
+        btn.innerHTML = "🔊 Music ON";
 
     }else{
 
-        if(musicPlaying){
-
-            music.play().catch(()=>{});
-
-        }
+        bgMusic.play().catch(()=>{});
+        btn.innerHTML = "🔇 Music OFF";
 
     }
+
+    musicOn = !musicOn;
+
+}
+
+// =========================
+// AUTO START MUSIC
+// =========================
+
+window.addEventListener("load",()=>{
+
+    bgMusic.play().catch(()=>{});
 
 });
 
 // =========================
-// RESTART MUSIC IF ENDED
+// PREVENT STOP
 // =========================
 
-music.addEventListener("ended",()=>{
+bgMusic.addEventListener("ended",()=>{
 
-    music.currentTime=0;
-
-    if(musicPlaying){
-
-        music.play();
-
-    }
+    bgMusic.currentTime = 0;
+    bgMusic.play();
 
 });
 
 // =========================
-// INITIAL BUTTON STATE
+// READY
 // =========================
 
-musicBtn.innerHTML="🔇 Music OFF";
-
-// =========================
-// SCRIPT READY
-// =========================
-
-console.log("Birthday Surprise Website Loaded Successfully ❤️");
+console.log("Birthday Website Loaded ❤️");
