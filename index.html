@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 
 <head>
 
@@ -7,363 +7,489 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>🎂 Birthday Surprise ❤️</title>
+<title>💎 Diamond Price Book</title>
 
 <link rel="stylesheet" href="style.css">
 
-<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 </head>
 
 <body>
 
 <!-- Background Music -->
-
 <audio id="bgMusic" autoplay loop>
-
-<source src="music.mp3" type="audio/mpeg">
-
+    <source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <!-- Click Sound -->
-
 <audio id="clickSound">
-
-<source src="click.mp3" type="audio/mpeg">
-
+    <source src="click.mp3" type="audio/mpeg">
 </audio>
 
-<!-- Background Effects -->
-
-<div class="bg-gradient"></div>
-
-<div class="stars"></div>
-
-<div class="emoji-rain"></div>
-
-<div class="rain"></div>
-
-<div class="glow"></div>
+<!-- Floating Emoji -->
+<div class="emoji-bg">
+<span>💎</span>
+<span>🔥</span>
+<span>🎮</span>
+<span>👑</span>
+<span>✨</span>
+<span>💜</span>
+<span>⭐</span>
+<span>💎</span>
+</div>
 
 <div class="container">
 
-<!-- =========================
-LOGIN PAGE
-========================= -->
+<!-- HEADER -->
 
-<section id="loginPage" class="page active">
+<header>
 
-<div class="glass-card">
+<div class="logo">
 
-<h1>🎂 Birthday Surprise 🎂</h1>
+<h1>💎 Diamond Price Book</h1>
 
-<p class="subText">
+<p>Save Your Personal Prices</p>
 
-💖 Welcome 💖
-
-</p>
-
-<h2>
-
-🔑 Send Your Key Name
-
-</h2>
+</div>
 
 <input
+type="text"
+id="searchBox"
+placeholder="🔍 Search Package...">
 
-id="keyInput"
+</header>
 
-type="password"
+<!-- CATEGORY -->
 
-placeholder="Click Here"
+<div class="category">
 
-readonly
+<button class="catBtn active"
+onclick="showCategory('uid')">
+🎮 UID
+</button>
 
-onclick="autoFillKey()"
+<button class="catBtn"
+onclick="showCategory('weekly')">
+📅 Weekly
+</button>
 
->
+<button class="catBtn"
+onclick="showCategory('monthly')">
+👑 Monthly
+</button>
+
+<button class="catBtn"
+onclick="showCategory('level')">
+⭐ Level Pass
+</button>
+
+<button class="catBtn"
+onclick="showCategory('indo')">
+🌍 Indonesia
+</button>
+
+</div>
+
+<!-- UID SECTION -->
+
+<section
+id="uid"
+class="categoryPage active">
+
+<h2>🎮 UID TOPUP (BD)</h2>
+
+<div class="cards">
+    <!-- UID CARDS -->
+
+<div class="card">
+
+<h3>💎 Weekly</h3>
+
+<input
+type="text"
+placeholder="Price (BDT)"
+value="158">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💎 25 Diamond</h3>
+
+<input
+type="text"
+placeholder="Price (BDT)"
+value="22">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💎 50 Diamond</h3>
+
+<input
+type="text"
+placeholder="Price (BDT)"
+value="36">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💎 115 Diamond</h3>
+
+<input
+type="text"
+placeholder="Price (BDT)"
+value="79">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💎 240 Diamond</h3>
+
+<input
+type="text"
+placeholder="Price (BDT)"
+value="158">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💎 355 Diamond</h3>
+
+<input
+type="text"
+placeholder="Price (BDT)"
+value="237">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💎 480 Diamond</h3>
+
+<input
+type="text"
+placeholder="Price (BDT)"
+value="316">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💎 610 Diamond</h3>
+
+<input
+type="text"
+placeholder="Price (BDT)"
+value="400">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💎 850 Diamond</h3>
+
+<input
+type="text"
+placeholder="Price (BDT)"
+value="553">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- WEEKLY SECTION -->
+
+<section
+id="weekly"
+class="categoryPage">
+
+<h2>📅 Weekly / Monthly</h2>
+
+<div class="cards">
+    <!-- WEEKLY / MONTHLY -->
+
+<div class="card">
+
+<h3>📅 Weekly</h3>
+
+<input type="text" value="158">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>📅 2X Weekly</h3>
+
+<input type="text" value="316">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>📅 3X Weekly</h3>
+
+<input type="text" value="474">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>👑 Monthly</h3>
+
+<input type="text" value="790">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>👑 2X Monthly</h3>
+
+<input type="text" value="1580">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>👑 1 Weekly + 1 Monthly</h3>
+
+<input type="text" value="948">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>👑 3 Weekly + 1 Monthly</h3>
+
+<input type="text" value="1265">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- LEVEL PASS -->
+
+<section
+id="level"
+class="categoryPage">
+
+<h2>⭐ Level Up Pass</h2>
+
+<div class="cards">
+    <!-- LEVEL PASS CARDS -->
+
+<div class="card">
+
+<h3>⭐ Level Up Pass</h3>
+
+<input
+type="text"
+value="185">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>⭐ Level Pass + Weekly</h3>
+
+<input
+type="text"
+value="343">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>⭐ Level Pass + Monthly</h3>
+
+<input
+type="text"
+value="975">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- INDONESIA SECTION -->
+
+<section
+id="indo"
+class="categoryPage">
+
+<h2>🌍 Indonesia Topup</h2>
+
+<div class="cards">
+
+<div class="card">
+
+<h3>💎 70 Diamond</h3>
+
+<input
+type="text"
+value="50">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💎 140 Diamond</h3>
+
+<input
+type="text"
+value="100">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💎 355 Diamond</h3>
+
+<input
+type="text"
+value="245">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+<div class="card">
+
+<h3>💎 720 Diamond</h3>
+
+<input
+type="text"
+value="485">
+
+<button onclick="savePrice(this)">
+💾 Save
+</button>
+
+</div>
+
+</div>
+
+</section>
+<!-- FOOTER -->
+
+<footer>
 
 <p>
 
-👇 Box-এ Click করলেই Key বসবে
+💎 Personal Diamond Price Book
+
+<br>
+
+Save • Edit • Search • Offline
 
 </p>
 
-<button
-
-id="loginBtn"
-
-class="loginBtn pulse"
-
-onclick="loginSite()">
-
-🚀 Login
-
-</button>
+</footer>
 
 </div>
 
-</section>
-
-<!-- =========================
-COUNTDOWN PAGE
-(Login-এর পর দেখাবে)
-========================= -->
-
-<section id="countdownPage" class="page">
-
-<div class="glass-card">
-
-<h2>
-
-⏳ Birthday Countdown 🎂
-
-</h2>
-
-<h1 id="countdown">
-
-00 : 00 : 00
-
-</h1>
-
-<p>
-
-❤️ ঠিক রাত <b>9:30 PM</b> হলে Surprise খুলবে।
-
-</p>
-
-<button
-
-class="backBtn"
-
-onclick="goBack('loginPage')">
-
-⬅ Back
-
-</button>
-
-</div>
-
-</section>
-
-<!-- STEP 1 নিচের Part-এ শুরু হবে -->
-    <!-- =========================
-STEP 1
-========================= -->
-
-<section id="step1" class="page">
-
-<div class="glass-card">
-
-<h2>🌙 আজ কিছু কথা... ❤️</h2>
-
-<p class="story">
-
-আজ অনেক কিছু বলার আছে... 🌸<br>
-
-জানি, তুমি হয়তো আজ আর আমার জীবনের অংশ নও... 😔<br>
-
-তবুও আজকের দিনটা শুধু তোমার... 🎂💖<br>
-
-তাই কিছু কথা বলতে চাই... ❤️
-
-</p>
-
-<div class="btnArea">
-
-<button
-class="backBtn"
-onclick="goBack('countdownPage')">
-
-⬅ Back
-
-</button>
-
-<button
-class="nextBtn"
-onclick="nextStep(2)">
-
-➡ পরের পৃষ্ঠা
-
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- =========================
-STEP 2
-========================= -->
-
-<section id="step2" class="page">
-
-<div class="glass-card">
-
-<h2>💭 কিছু স্মৃতি... ✨</h2>
-
-<p class="story">
-
-এক সময় প্রতিদিন কথা হতো... 😊<br>
-
-হাসি ছিল... 😄<br>
-
-অভিমান ছিল... 🥺<br>
-
-আজ সেগুলো শুধু স্মৃতি... 💙<br>
-
-তবুও সেই স্মৃতিগুলো আজও আমার কাছে অমূল্য... ❤️
-
-</p>
-
-<div class="btnArea">
-
-<button
-class="backBtn"
-onclick="goBack('step1')">
-
-⬅ Back
-
-</button>
-
-<button
-class="nextBtn"
-onclick="nextStep(3)">
-
-➡ পরের পৃষ্ঠা
-
-</button>
-
-</div>
-
-</div>
-
-    </section>
-    <!-- =========================
-STEP 4
-========================= -->
-
-<section id="step4" class="page">
-
-<div class="glass-card">
-
-<h2>
-
-🎂 শুভ জন্মদিন 🎉
-
-</h2>
-
-<p class="story">
-
-🎉 শুভ জন্মদিন! 🎂❤️
-
-<br>
-
-🤲 আল্লাহ যেন তোমার প্রতিটি স্বপ্ন পূরণ করেন।
-
-<br>
-
-😊 তুমি সবসময় ভালো থেকো।
-
-<br>
-
-🌸 তোমার মুখের হাসি যেন কখনো হারিয়ে না যায়।
-
-<br>
-
-💖 আমি তোমার জীবনে না থাকলেও,
-
-আমার দোয়া সবসময় থাকবে।
-
-</p>
-
-<div class="btnArea">
-
-<button
-class="backBtn"
-onclick="goBack('step3')">
-
-⬅ Back
-
-</button>
-
-<button
-class="nextBtn"
-onclick="nextStep(5)">
-
-➡ শেষ পৃষ্ঠা
-
-</button>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- =========================
-STEP 5
-========================= -->
-
-<section id="step5" class="page">
-
-<div class="glass-card">
-
-<h2>
-
-🌌 শেষ কিছু কথা...
-
-</h2>
-
-<p class="story">
-
-🌙 কিছু মানুষ গল্প হয়ে যায়...
-
-<br>
-
-📖 কিন্তু কিছু গল্প কখনো শেষ হয় না।
-
-<br>
-
-💖 তুমি সবসময় ভালো থেকো।
-
-<br>
-
-🎂 শুভ জন্মদিন।
-
-<br>
-
-✨ আল্লাহ তোমাকে সবসময় সুখে রাখুন।
-
-</p>
-
-<div class="btnArea">
-
-<button
-class="backBtn"
-onclick="goBack('step4')">
-
-⬅ Back
-
-</button>
-
-</div>
-
-<div class="made">
-
-Made With ❤️ By Me
-
-</div>
-
-</div>
-
-</section>
-
-</div>
+<!-- END CONTAINER -->
 
 <script src="script.js"></script>
 
 </body>
 
-    </html>
+</html>
