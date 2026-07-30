@@ -2,263 +2,65 @@
 // ELEMENTS
 // =========================
 
-const pages = document.querySelectorAll(".page");
+const categoryPages =
+document.querySelectorAll(".categoryPage");
 
-const loginPage = document.getElementById("loginPage");
-const countdownPage = document.getElementById("countdownPage");
+const categoryBtns =
+document.querySelectorAll(".catBtn");
 
-const countdown = document.getElementById("countdown");
+const searchBox =
+document.getElementById("searchBox");
 
-const bgMusic = document.getElementById("bgMusic");
-const clickSound = document.getElementById("clickSound");
+const clickSound =
+document.getElementById("clickSound");
 
-const keyInput = document.getElementById("keyInput");
-
-// =========================
-// TARGET TIME
-// =========================
-
-// আজ রাত 9:30
-
-const targetDate = new Date("2026-07-29T21:30:00");
+const bgMusic =
+document.getElementById("bgMusic");
 
 // =========================
-// PAGE FUNCTIONS
-// =========================
-
-function hideAllPages(){
-
-    pages.forEach(page=>page.classList.remove("active"));
-
-}
-
-function showPage(id){
-
-    hideAllPages();
-
-    document.getElementById(id).classList.add("active");
-
-}
-
-// =========================
-// AUTO FILL KEY
-// =========================
-
-function autoFillKey(){
-
-    keyInput.value = "112233";
-
-}
-
-// =========================
-// LOGIN
-// =========================
-
-function loginSite(){
-
-    clickSound.currentTime = 0;
-    clickSound.play();
-
-    bgMusic.play().catch(()=>{});
-
-    showPage("countdownPage");
-
-}
-// =========================
-// COUNTDOWN
-// =========================
-
-const timer = setInterval(updateCountdown,1000);
-
-updateCountdown();
-
-function updateCountdown(){
-
-    const now = new Date();
-
-    const distance = targetDate - now;
-
-    if(distance <= 0){
-
-        clearInterval(timer);
-
-        localStorage.setItem("birthdayOpen","true");
-
-        showPage("step1");
-
-        return;
-
-    }
-
-    const h = Math.floor(distance/(1000*60*60));
-    const m = Math.floor((distance%(1000*60*60))/(1000*60));
-    const s = Math.floor((distance%(1000*60))/1000);
-
-    countdown.innerHTML =
-    `${String(h).padStart(2,"0")} :
-     ${String(m).padStart(2,"0")} :
-     ${String(s).padStart(2,"0")}`;
-
-}
-
-// =========================
-// NEXT PAGE
-// =========================
-
-function nextStep(step){
-
-    clickSound.currentTime = 0;
-
-    clickSound.play();
-
-    showPage("step"+step);
-
-}
-
-// =========================
-// BACK PAGE
-// =========================
-
-function goBack(page){
-
-    clickSound.currentTime = 0;
-
-    clickSound.play();
-
-    showPage(page);
-
-}
-
-// =========================
-// FIRST LOAD
-// =========================
-
-window.onload = ()=>{
-
-    if(localStorage.getItem("birthdayOpen")==="true"){
-
-        showPage("step1");
-
-    }else{
-
-        showPage("loginPage");
-
-    }
-
-};
-// =========================
-// NEXT / BACK
-// =========================
-
-function nextStep(step){
-
-    clickSound.currentTime = 0;
-    clickSound.play();
-
-    showPage("step" + step);
-
-}
-
-function goBack(page){
-
-    clickSound.currentTime = 0;
-    clickSound.play();
-
-    showPage(page);
-
-}
-
-// =========================
-// MUSIC TOGGLE
-// =========================
-
-let musicOn = true;
-
-function toggleMusic(){
-
-    clickSound.currentTime = 0;
-    clickSound.play();
-
-    const btn = document.getElementById("musicBtn");
-
-    if(musicOn){
-
-        bgMusic.pause();
-        btn.innerHTML = "🔊 Music ON";
-
-    }else{
-
-        bgMusic.play().catch(()=>{});
-        btn.innerHTML = "🔇 Music OFF";
-
-    }
-
-    musicOn = !musicOn;
-
-}
-
-// =========================
-// AUTO START MUSIC
+// AUTO MUSIC
 // =========================
 
 window.addEventListener("load",()=>{
 
     bgMusic.play().catch(()=>{});
 
-});
-
-// =========================
-// PREVENT STOP
-// =========================
-
-bgMusic.addEventListener("ended",()=>{
-
-    bgMusic.currentTime = 0;
-    bgMusic.play();
+    loadPrices();
 
 });
 
 // =========================
-// READY
+// CATEGORY CHANGE
 // =========================
 
-console.log("Birthday Website Loaded ❤️");
-// =========================
-// STEP NAVIGATION
-// =========================
-
-function nextStep(step){
+function showCategory(id){
 
     playClick();
 
-    hideAllPages();
+    categoryPages.forEach(page=>{
+
+        page.classList.remove("active");
+
+    });
+
+    categoryBtns.forEach(btn=>{
+
+        btn.classList.remove("active");
+
+    });
 
     document
-    .getElementById("step"+step)
-    .classList.add("active");
+    .getElementById(id)
+    .classList
+    .add("active");
 
-    startTyping(step);
-
-}
-
-function goBack(pageId){
-
-    playClick();
-
-    hideAllPages();
-
-    document
-    .getElementById(pageId)
-    .classList.add("active");
+    event.target.classList.add("active");
 
 }
 
 // =========================
 // CLICK SOUND
 // =========================
-
-const clickSound =
-document.getElementById("clickSound");
 
 function playClick(){
 
@@ -269,247 +71,109 @@ function playClick(){
 }
 
 // =========================
-// MUSIC ON / OFF
+// SAVE PRICE
 // =========================
 
-const music =
-document.getElementById("bgMusic");
-
-const musicBtn =
-document.getElementById("musicBtn");
-
-let musicPlaying = true;
-
-function toggleMusic(){
+function savePrice(button){
 
     playClick();
 
-    if(musicPlaying){
+    const input =
+    button.previousElementSibling;
 
-        music.pause();
+    const card =
+    button.parentElement;
 
-        musicBtn.innerHTML =
-        "🔊 Music ON";
+    const name =
+    card.querySelector("h3").innerText;
 
-    }else{
+    localStorage.setItem(
+        name,
+        input.value
+    );
 
-        music.play();
+    button.innerHTML = "✅ Saved";
 
-        musicBtn.innerHTML =
-        "🔇 Music OFF";
+    setTimeout(()=>{
 
-    }
+        button.innerHTML = "💾 Save";
 
-    musicPlaying = !musicPlaying;
+    },1200);
+
+}
+// =========================
+// LOAD SAVED PRICES
+// =========================
+
+function loadPrices(){
+
+    document.querySelectorAll(".card").forEach(card=>{
+
+        const title =
+        card.querySelector("h3").innerText;
+
+        const input =
+        card.querySelector("input");
+
+        const saved =
+        localStorage.getItem(title);
+
+        if(saved){
+
+            input.value = saved;
+
+        }
+
+    });
 
 }
 
 // =========================
-// AUTO PLAY
+// SEARCH
 // =========================
 
-window.addEventListener("load",()=>{
+searchBox.addEventListener("keyup",()=>{
 
-    music.play().catch(()=>{});
+    const value =
+    searchBox.value.toLowerCase();
+
+    document.querySelectorAll(".card").forEach(card=>{
+
+        const text =
+        card.innerText.toLowerCase();
+
+        if(text.includes(value)){
+
+            card.style.display="block";
+
+        }else{
+
+            card.style.display="none";
+
+        }
+
+    });
 
 });
 
 // =========================
-// TYPING EFFECT
+// ENTER KEY SAVE
 // =========================
 
-const storyContent=[
+document.querySelectorAll(".card input")
+.forEach(input=>{
 
-`💖 আজ অনেক কিছু বলার আছে...
-😔 জানি তুমি হয়তো আজ আর আমার জীবনের অংশ নও।
-🌸 তবুও আজকের দিনটা শুধু তোমার...`,
+    input.addEventListener("keypress",(e)=>{
 
-`😊 এক সময় প্রতিদিন কথা হতো...
-💙 আজ সেগুলো শুধু স্মৃতি...
-❤️ তবুও ভুলিনি...`,
+        if(e.key==="Enter"){
 
-`🌧️ তুমি চলে গেছো...
-🤍 ভালোবাসা জোর করে ধরে রাখা যায় না...`,
-
-`🎂 শুভ জন্মদিন...
-❤️ আল্লাহ তোমাকে সবসময় সুখে রাখুন...`,
-
-`🌌 কিছু গল্প কখনো শেষ হয় না...
-💖 ভালো থেকো...`
-
-];
-/* =========================
-MUSIC BUTTON
-========================= */
-
-#musicBtn{
-
-    width:100%;
-    padding:14px;
-    margin-top:12px;
-
-    border:none;
-    border-radius:14px;
-
-    background:#ff4d6d;
-    color:#fff;
-
-    font-size:17px;
-    font-weight:bold;
-
-    cursor:pointer;
-
-    transition:.3s;
-
-}
-
-#musicBtn:hover{
-
-    transform:scale(1.05);
-
-    box-shadow:0 0 20px #ff4d6d;
-
-}
-
-/* =========================
-MADE BY
-========================= */
-
-.made{
-
-    margin-top:18px;
-
-    text-align:center;
-
-    color:#ddd;
-
-    font-size:15px;
-
-}
-
-/* =========================
-RESPONSIVE
-========================= */
-
-@media(max-width:480px){
-
-.container{
-
-width:95%;
-
-}
-
-.glass-card{
-
-padding:22px;
-
-}
-
-h2{
-
-font-size:24px;
-
-}
-
-.story{
-
-font-size:16px;
-
-line-height:1.6;
-
-}
-
-.nextBtn,
-.backBtn,
-.loginBtn{
-
-font-size:16px;
-
-}
-
-}
-
-/* =========================
-SCROLLBAR
-========================= */
-
-::-webkit-scrollbar{
-
-width:6px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-background:#ff5fa2;
-
-border-radius:20px;
-
-}
-
-/* =========================
-END
-========================= */
-// =========================
-// TYPING EFFECT
-// =========================
-
-function typeWriter(element, text, speed = 35){
-
-    element.innerHTML = "";
-
-    let i = 0;
-
-    function typing(){
-
-        if(i < text.length){
-
-            element.innerHTML += text.charAt(i);
-
-            i++;
-
-            setTimeout(typing, speed);
+            input.nextElementSibling.click();
 
         }
 
-    }
+    });
 
-    typing();
-
-}
-
-function startTyping(step){
-
-    const el = document.querySelector(`#step${step} .story`);
-
-    if(!el) return;
-
-    typeWriter(el, storyContent[step-1]);
-
-}
-
-// =========================
-// RESTORE PAGE
-// =========================
-
-window.onload = function(){
-
-    if(localStorage.getItem("birthdayOpen")==="true"){
-
-        showPage("step1");
-
-        startTyping(1);
-
-    }else{
-
-        showPage("loginPage");
-
-    }
-
-    bgMusic.play().catch(()=>{});
-
-};
-
+});
 // =========================
 // KEEP MUSIC PLAYING
 // =========================
@@ -520,7 +184,7 @@ document.addEventListener("visibilitychange",()=>{
 
         bgMusic.pause();
 
-    }else if(musicPlaying){
+    }else{
 
         bgMusic.play().catch(()=>{});
 
@@ -532,11 +196,122 @@ bgMusic.addEventListener("ended",()=>{
 
     bgMusic.currentTime = 0;
 
-    if(musicPlaying){
+    bgMusic.play();
 
-        bgMusic.play();
+});
+
+// =========================
+// AUTO SAVE
+// =========================
+
+document.querySelectorAll(".card input")
+.forEach(input=>{
+
+    input.addEventListener("input",()=>{
+
+        const card =
+        input.parentElement;
+
+        const title =
+        card.querySelector("h3").innerText;
+
+        localStorage.setItem(
+            title,
+            input.value
+        );
+
+    });
+
+});
+
+// =========================
+// CLEAR SEARCH
+// =========================
+
+searchBox.addEventListener("search",()=>{
+
+    document.querySelectorAll(".card")
+    .forEach(card=>{
+
+        card.style.display="block";
+
+    });
+
+});
+
+// =========================
+// START
+// =========================
+
+loadPrices();
+
+console.log("💎 Diamond Price Book Ready");
+// =========================
+// RESET ALL PRICES
+// =========================
+
+function resetPrices(){
+
+    if(confirm("সব Saved Price মুছে ফেলতে চান?")){
+
+        localStorage.clear();
+
+        location.reload();
 
     }
+
+}
+
+// =========================
+// EXPORT PRICES
+// =========================
+
+function exportPrices(){
+
+    const data = {};
+
+    document.querySelectorAll(".card").forEach(card=>{
+
+        const title = card.querySelector("h3").innerText;
+
+        const value = card.querySelector("input").value;
+
+        data[title] = value;
+
+    });
+
+    const blob = new Blob(
+        [JSON.stringify(data,null,2)],
+        {type:"application/json"}
+    );
+
+    const link = document.createElement("a");
+
+    link.href = URL.createObjectURL(blob);
+
+    link.download = "Diamond_Prices.json";
+
+    link.click();
+
+}
+
+// =========================
+// BUTTON ANIMATION
+// =========================
+
+document.querySelectorAll("button").forEach(btn=>{
+
+    btn.addEventListener("click",()=>{
+
+        btn.classList.add("clicked");
+
+        setTimeout(()=>{
+
+            btn.classList.remove("clicked");
+
+        },200);
+
+    });
 
 });
 
@@ -544,4 +319,6 @@ bgMusic.addEventListener("ended",()=>{
 // READY
 // =========================
 
-console.log("🎂 Birthday Website Ready ❤️");
+console.log("💎 Diamond Price Book Loaded Successfully!");
+
+bgMusic.volume = 0.5;
